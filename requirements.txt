@@ -1,0 +1,6 @@
+qiskit>=2.1.1
+qiskit-aer>=0.17.1
+rdkit-pypi>=2022.9.1
+streamlit>=1.32.0
+numpy>=1.26.0
+pillow>=10.0.0
