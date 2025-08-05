@@ -90,8 +90,8 @@ st.header("🔬 Drug Interaction Analysis")
 col1, col2 = st.columns(2)
 
 # Get values from session state if available, otherwise use defaults
-default_drug1 = st.session_state.get("example_drug1", "aspirin")
-default_drug2 = st.session_state.get("example_drug2", "ibuprofen")
+default_drug1 = st.session_state.get("example_drug1", "")
+default_drug2 = st.session_state.get("example_drug2", "")
 
 with col1:
     st.subheader("💊 Drug 1")
@@ -107,30 +107,37 @@ with col2:
     drug2 = st.text_input(
         "Enter drug name or SMILES:",
         value=default_drug2, 
-        placeholder="e.g., warfarin, C1=CC=CC=C1",
+        placeholder="e.g., warfarin, C1=CC=C1CC=C1",
         key="drug2_input"
     )
 
 # Example drugs
 st.markdown("**💡 Try these examples:**")
-example_col1, example_col2, example_col3 = st.columns(3)
+example_col1, example_col2, example_col3, clear_col = st.columns(4)
 
 with example_col1:
     if st.button("Aspirin + Warfarin", key="example1"):
-        st.session_state["example_drug1"] = "aspirin"
-        st.session_state["example_drug2"] = "warfarin"
+        # Use SMILES for reliable cloud compatibility
+        st.session_state["example_drug1"] = "CC(=O)OC1=CC=CC=C1C(=O)O"  # Aspirin SMILES
+        st.session_state["example_drug2"] = "CC1=C(C2=C(C=CC=C2OC1=O)O)C(CC(C3=CC=CC=C3)C4=CC=CC=C4)=O"  # Warfarin SMILES
         st.rerun()
 
 with example_col2:
     if st.button("Ibuprofen + Acetaminophen", key="example2"):
-        st.session_state["example_drug1"] = "ibuprofen"
-        st.session_state["example_drug2"] = "acetaminophen"
+        st.session_state["example_drug1"] = "CC(C)CC1=CC=C(C=C1)C(C)C(=O)O"  # Ibuprofen SMILES
+        st.session_state["example_drug2"] = "CC(=O)NC1=CC=C(C=C1)O"  # Acetaminophen SMILES
         st.rerun()
 
 with example_col3:
     if st.button("Metformin + Caffeine", key="example3"):
-        st.session_state["example_drug1"] = "metformin"
-        st.session_state["example_drug2"] = "caffeine"
+        st.session_state["example_drug1"] = "CN(C)C(=N)NC(=N)N"  # Metformin SMILES
+        st.session_state["example_drug2"] = "CN1C=NC2=C1C(=O)N(C(=O)N2C)C"  # Caffeine SMILES
+        st.rerun()
+
+with clear_col:
+    if st.button("🗑️ Clear", key="clear_inputs"):
+        st.session_state["example_drug1"] = ""
+        st.session_state["example_drug2"] = ""
         st.rerun()
 
 # Analysis button
@@ -272,7 +279,27 @@ if st.button("🔍 Predict Interaction", type="primary"):
         
         else:
             st.error("❌ Could not fetch molecular data. Please check drug names or SMILES notation.")
-            st.info("💡 **Tip:** Try common drug names like 'aspirin', 'ibuprofen', or valid SMILES strings like 'CCO' for ethanol.")
+            st.info("""
+            💡 **Tips for better results:**
+            - Use the example buttons above for tested drug combinations
+            - Try common drug names: aspirin, ibuprofen, acetaminophen, metformin, caffeine
+            - Use valid SMILES strings like 'CCO' for ethanol
+            - For complex drugs, use SMILES notation instead of drug names
+            """)
+            
+            # Show some suggestions
+            with st.expander("🔍 Suggested SMILES for common drugs"):
+                st.markdown("""
+                **Pain relievers:**
+                - Aspirin: `CC(=O)OC1=CC=CC=C1C(=O)O`
+                - Ibuprofen: `CC(C)CC1=CC=C(C=C1)C(C)C(=O)O`
+                - Acetaminophen: `CC(=O)NC1=CC=C(C=C1)O`
+                
+                **Other drugs:**
+                - Caffeine: `CN1C=NC2=C1C(=O)N(C(=O)N2C)C`
+                - Metformin: `CN(C)C(=N)NC(=N)N`
+                - Ethanol: `CCO`
+                """)
     
     else:
         st.warning("⚠️ Please enter both drugs to analyze interactions.")
