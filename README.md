@@ -346,7 +346,7 @@ This project is open source under the MIT License. See `LICENSE` file for detail
 
 ## 🔗 Links & Resources
 
-- **🌐 Live Demo**: `http://localhost:8501` (after setup)
+- **🌐 Live Demo**: https://q-cure-sumeet.streamlit.app/ 
 - **📁 GitHub**: https://github.com/sumeet156/Q-Cure
 - **📖 Qiskit**: https://qiskit.org/
 - **🧬 PubChem**: https://pubchem.ncbi.nlm.nih.gov/
