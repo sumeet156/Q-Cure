@@ -1,18 +1,37 @@
 import time
 import numpy as np
 from quantum_chemistry import QuantumChemistry
-from rdkit import Chem
-from rdkit.Chem import Descriptors
+
+# Handle RDKit import gracefully
+try:
+    from rdkit import Chem
+    from rdkit.Chem import Descriptors
+    RDKIT_AVAILABLE = True
+except ImportError:
+    print("RDKit not available - using simplified calculations")
+    RDKIT_AVAILABLE = False
+    Chem = None
+    Descriptors = None
+
+def _estimate_properties_simple(smiles):
+    """Simple estimation when RDKit is not available."""
+    carbon_count = smiles.count('C') + smiles.count('c')
+    oxygen_count = smiles.count('O') + smiles.count('o')
+    estimated_mw = (carbon_count * 12) + (oxygen_count * 16) + len(smiles)
+    estimated_logp = (carbon_count - oxygen_count * 2) / max(carbon_count + oxygen_count, 1)
+    return max(estimated_mw, 50), max(-5, min(5, estimated_logp))
 
 def compute_energy_classically(smiles):
     """Classical energy computation using molecular descriptors."""
-    mol = Chem.MolFromSmiles(smiles)
-    if not mol:
-        return 0.0
-    
-    # Simple classical approximation using molecular weight and properties
-    mw = Descriptors.MolWt(mol)
-    logp = Descriptors.MolLogP(mol)
+    if RDKIT_AVAILABLE:
+        mol = Chem.MolFromSmiles(smiles)
+        if mol:
+            mw = Descriptors.MolWt(mol)
+            logp = Descriptors.MolLogP(mol)
+        else:
+            mw, logp = _estimate_properties_simple(smiles)
+    else:
+        mw, logp = _estimate_properties_simple(smiles)
     
     # Classical energy approximation (simplified)
     classical_energy = -mw / 60 + logp * 0.05

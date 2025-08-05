@@ -154,7 +154,12 @@ if st.button("🔍 Predict Interaction", type="primary"):
                 st.markdown(f"- **LogP:** {mol1['logp']:.2f}")
                 st.markdown(f"- **H-Bond Donors:** {mol1['hbd']}")
                 st.markdown(f"- **H-Bond Acceptors:** {mol1['hba']}")
-                st.image(mol1["image"], caption=f"{drug1.title()} Structure", width=300)
+                
+                # Display molecular structure image only if available
+                if mol1.get("image") is not None:
+                    st.image(mol1["image"], caption=f"{drug1.title()} Structure", width=300)
+                else:
+                    st.info(f"📋 {drug1.title()} molecular structure\n\nSMILES: `{mol1['smiles']}`")
             
             with mol_col2:
                 st.markdown(f"**{drug2.title()}**")
@@ -163,7 +168,12 @@ if st.button("🔍 Predict Interaction", type="primary"):
                 st.markdown(f"- **LogP:** {mol2['logp']:.2f}")
                 st.markdown(f"- **H-Bond Donors:** {mol2['hbd']}")
                 st.markdown(f"- **H-Bond Acceptors:** {mol2['hba']}")
-                st.image(mol2["image"], caption=f"{drug2.title()} Structure", width=300)
+                
+                # Display molecular structure image only if available
+                if mol2.get("image") is not None:
+                    st.image(mol2["image"], caption=f"{drug2.title()} Structure", width=300)
+                else:
+                    st.info(f"📋 {drug2.title()} molecular structure\n\nSMILES: `{mol2['smiles']}`")
             
             # Quantum computation
             st.subheader("⚛️ Quantum Chemistry Analysis")
