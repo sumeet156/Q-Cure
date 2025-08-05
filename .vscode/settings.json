@@ -1,0 +1,18 @@
+{
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/*.pyc": true,
+        "app/app.py": true,
+        "HACKATHON_READY.md": true,
+        "README_updated.md": true
+    },
+    "files.watcherExclude": {
+        "**/__pycache__/**": true,
+        "**/*.pyc": true,
+        "app/app.py": true,
+        "HACKATHON_READY.md": true,
+        "README_updated.md": true
+    },
+    "python.defaultInterpreterPath": "./q_cure_env/Scripts/python.exe",
+    "python.terminal.activateEnvironment": true
+}
