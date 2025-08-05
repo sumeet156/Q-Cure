@@ -1,0 +1,36 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        // Prevent auto-creation of unwanted files
+        "files.watcherExclude": {
+            "**/app.py": true,
+            "**/HACKATHON_READY.md": true,
+            "**/README_updated.md": true
+        },
+        
+        // Hide these files from explorer
+        "files.exclude": {
+            "**/app.py": true,
+            "**/HACKATHON_READY.md": true,
+            "**/README_updated.md": true
+        },
+        
+        // Project-specific settings
+        "python.defaultInterpreterPath": "./q_cure_env/Scripts/python.exe",
+        "files.autoSave": "off",
+        
+        // Disable auto-suggestions that might create files
+        "extensions.autoUpdate": false,
+        "python.createEnvironment.trigger": "off"
+    },
+    "extensions": {
+        "recommendations": [
+            "ms-python.python",
+            "ms-toolsai.jupyter"
+        ]
+    }
+}

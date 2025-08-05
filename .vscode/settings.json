@@ -1,18 +1,35 @@
 {
-    "files.exclude": {
-        "**/__pycache__": true,
-        "**/*.pyc": true,
-        "app/app.py": true,
-        "HACKATHON_READY.md": true,
-        "README_updated.md": true
-    },
+    // Prevent auto-creation of unwanted files
     "files.watcherExclude": {
-        "**/__pycache__/**": true,
-        "**/*.pyc": true,
-        "app/app.py": true,
-        "HACKATHON_READY.md": true,
-        "README_updated.md": true
+        "**/app.py": true,
+        "**/HACKATHON_READY.md": true,
+        "**/README_updated.md": true
     },
+    
+    // Disable auto-save and auto-creation features that might generate files
+    "files.autoSave": "off",
+    "extensions.autoUpdate": false,
+    
+    // Exclude these files from file explorer
+    "files.exclude": {
+        "**/app.py": true,
+        "**/HACKATHON_READY.md": true, 
+        "**/README_updated.md": true
+    },
+    
+    // Prevent search in these files
+    "search.exclude": {
+        "**/app.py": true,
+        "**/HACKATHON_READY.md": true,
+        "**/README_updated.md": true
+    },
+    
+    // Disable auto-creation extensions
+    "python.createEnvironment.trigger": "off",
     "python.defaultInterpreterPath": "./q_cure_env/Scripts/python.exe",
-    "python.terminal.activateEnvironment": true
+    
+    // Disable template auto-generation
+    "emmet.showExpandedAbbreviation": "never",
+    "html.autoCreateQuotes": false,
+    "typescript.suggest.autoImports": false
 }
