@@ -351,6 +351,7 @@ This project is open source under the MIT License. See `LICENSE` file for detail
 - **📖 Qiskit**: https://qiskit.org/
 - **🧬 PubChem**: https://pubchem.ncbi.nlm.nih.gov/
 - **⚛️ IBM Quantum**: https://quantum-computing.ibm.com/
+- **📹 YouTube ProjectDemo**: https://youtu.be/4pn_qurg2J8
 
 ---
 
